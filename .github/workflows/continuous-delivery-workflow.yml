@@ -9,16 +9,16 @@ jobs:
      - run:  docker build --tag test_from_file .
 
     job2: Tag the image to the docker repo
-    needs: job1
+    needs: [job1]
     steps:
      - run: docker tag branch_1 mitub22/dotnettemplate:test_from_file
     
     job3: Login to Docker Hub
-    needs: job2
+    needs: [job1,job2]
     steps:
      - run: docker login --username=${{ secrets.DOCKER_USER }} --password=${{ secrets.DOCKER_PASSWORD }}
 
     job4: Push the docker image to Docker Hub
-    needs: job3
+    needs: [job1,job2,job3]
     steps:
      - run:  docker push mitub22/dotnettemplate:test_from_file

@@ -1,19 +1,27 @@
 name: Continuous Delivery
 
 jobs:
-    job1: Build and push the docker image
+    job1: Build the docker image
     runs-on: ubuntu-latest
     needs: Build and test
     steps:
-     - name: Build the docker image
      - uses: actions/checkout@v3
-     - run:  docker build --tag branch_1 .
+     - run:  docker build --tag test_from_file .
 
-     - name: Tag the image to the docker repo
-     - run: docker tag branch_1 mitub22/dotnettemplate:branch_1
-
-     - name: Login to Docker
+    job2: Tag the image to the docker repo
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+     - run: docker tag branch_1 mitub22/dotnettemplate:test_from_file
+    
+    job3: Login to Docker Hub
+    runs-on: ubuntu-latest
+    needs: job2
+    steps:
      - run: docker login --username=${{ secrets.DOCKER_USER }} --password=${{ secrets.DOCKER_PASSWORD }}
 
-     - name: Push the docker image
-     - run:  docker push mitub22/dotnettemplate:branch_1
+    job4: Push the docker image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: job3
+    steps:
+     - run:  docker push mitub22/dotnettemplate:test_from_file

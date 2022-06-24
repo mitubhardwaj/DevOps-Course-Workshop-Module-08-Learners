@@ -1,7 +1,8 @@
 name: Continuous Delivery
 on: 
  workflow_run:
-    workflows: ["Build and test"]
+    workflows:
+     - Continuous Integration
     types:
       - completed
 

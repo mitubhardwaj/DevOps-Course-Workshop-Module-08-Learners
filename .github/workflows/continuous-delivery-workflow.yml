@@ -5,6 +5,8 @@ on:
      - Continuous Integration
     types:
       - completed
+    branches:
+      - branch_3  
 
 jobs:
     job1: 

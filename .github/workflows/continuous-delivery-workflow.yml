@@ -11,6 +11,7 @@ jobs:
      name: building, tagging and pushing the image
      runs-on: ubuntu-latest
      steps:
+      - uses: actions/checkout@v3
       - run: docker build --tag test1 .
       - run: docker login --username=${{ secrets.DOCKER_USER }} --password=${{ secrets.DOCKER_PASSWORD }}
       - run: docker tag test1 mitub22/dotnettemplate:test1

@@ -5,10 +5,10 @@ on:
      - Continuous Integration
     types:
       - completed
- 
- push:
     branches:    
-      - main   
+      - main
+
+       
     
 jobs:
     job1: 

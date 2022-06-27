@@ -5,7 +5,9 @@ on:
      - Continuous Integration
     types:
       - completed
- branches:    
+ 
+ push:
+    branches:    
       - main   
     
 jobs:
